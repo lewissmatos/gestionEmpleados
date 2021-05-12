@@ -33,7 +33,8 @@ export class NewComponent implements OnInit {
       estado:[true, Validators.required],
       area:['administrativa', Validators.required],
       cargo:['', Validators.required],
-      comision:[0],
+      comision: [0],
+      edad: [0]
     })
   }
 
@@ -50,7 +51,8 @@ export class NewComponent implements OnInit {
     fechaCont: '',
     cargo:'',
     estado: true,    
-    comision: 0
+    comision: 0,
+    edad: 0
   }
   
   cargos: any = []
@@ -91,6 +93,9 @@ export class NewComponent implements OnInit {
     this.getCargosByArea('tecnologia')
     this.empleado.area = 'tecnologia'
     console.log(this.empleado);
+
+    this.formulario.value.cargo = '' 
+
   }
   
   fecha = '12-89-2001'
@@ -112,6 +117,8 @@ export class NewComponent implements OnInit {
   createEmpleado(formulario: any) {    
     
     this.charging = true
+
+    this.formulario.value.edad = this.calcularEdad(formulario.fechaNac)
   
     if (this.calcularEdad(formulario.fechaNac) < 18) {
       this.charging = false

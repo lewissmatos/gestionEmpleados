@@ -8,5 +8,6 @@ export interface Empleado{
   estado?: boolean,
   area?: string,
   cargo?: any,
-  comision?: number
+  comision?: number,
+  edad?:number
 }

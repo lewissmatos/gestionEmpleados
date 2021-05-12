@@ -21,12 +21,13 @@ export class HomeComponent implements OnInit {
 
   edad = 0
 
-  edades:number[] = []
   fechas = []
   
   ngOnInit(): void {
   }
 
+
+  
 
   theresEmp = false
 
@@ -35,10 +36,6 @@ export class HomeComponent implements OnInit {
       res => {
         this.empleados = res.data
 
-        this.fechas = res.data.map((x: any) => {
-          this.edades.push(this.calcularEdad(x.fechaNac))
-        })
-
         if (res.data.length > 0) {
           this.theresEmp = true
         }
@@ -46,25 +43,10 @@ export class HomeComponent implements OnInit {
           this.theresEmp = false
         }
 
-        console.log(res.data.length);
       }
     )
-
     
   }
-
-  calcularEdad(fecha: any) {
-    let hoy = new Date();
-    let cumpleanos = new Date(fecha);
-    let edad = hoy.getFullYear() - cumpleanos.getFullYear();
-    let m = hoy.getMonth() - cumpleanos.getMonth();
-
-    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
-      edad--;
-    }
-
-    return edad;
-}
 
   deleteEmpleado(_id: any) {
     Swal.fire({
@@ -82,12 +64,26 @@ export class HomeComponent implements OnInit {
           this.data.deleteEmpleado(_id).subscribe(
             res => {        
               this.getAllEmpleados()
-              console.log(res.data);
-            }
+            },error => console.log(error)
           )
         }
       }
     )
   }
 
+  empleadosFiltrados: any[] = []
+  
+  searching = false
+  
+  buscarEmpleado(termino: string = '') {
+
+    this.empleadosFiltrados = this.empleados.filter((x: any) => x.nombre.toLowerCase().includes(termino.toLowerCase()) || x.cargo.cargo.toLowerCase().includes(termino.toLowerCase()) || x.fechaCont.toLowerCase().includes(termino.toLowerCase())) 
+
+
+    if (termino !== '') {
+      this.searching = true
+    } else {
+      this.searching =false
+    }
+  }
 }
