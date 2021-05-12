@@ -34,35 +34,51 @@
             </div>
     
             <div class="col-lg-6">
-       
-                    <label for="nombre">AREA</label>
-                    <div class="row mb-3">
+                <label for="area">AREA</label>
+                <div id="area">
+
+                    <button (click)="area()" style="border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important;"
+                    [ngClass]="{'btn-acent': areaBool, 'btn-acent-secondary': !areaBool }"
+                    type="button" class="w-50 btn btn-acent">
+                        Administrativa
+                        <i *ngIf="areaBool" class="fa fa-check"></i>
+                    </button>
+                    <button (click)="area()" style="border-top-left-radius: 0px !important; border-bottom-left-radius: 0px !important;"
+                    [ngClass]="{'btn-acent': !areaBool, 'btn-acent-secondary': areaBool }"
+                    type="button" class="w-50 btn btn-acent-secondary">
+                        Tecnologia
+                        <i *ngIf="!areaBool" class="fa fa-check"></i>
+                    </button>
+                </div>  
+
+                    <!-- <div class="row mb-3">
                         <div class="col-6">
                             
-                            <button (click)="admin()"  
-                            [ngClass]="{'btn-acent': ad, 'btn-acent-secondary': !ad }"
+                            <button (click)="area()"  
+                            [ngClass]="{'btn-acent': areaBool, 'btn-acent-secondary': !areaBool }"
                             type="button" class="w-100 btn btn-acent">
                                 Administrativa
-                                <i *ngIf="ad" class="mx-1 fa fa-check"></i>
+                                <i *ngIf="areaBool" class="fa fa-check"></i>
                             </button>
                         </div>
+                       
                         <div class="col-6">
                             
-                            <button (click)="tecno()" 
-                            [ngClass]="{'btn-acent': tec, 'btn-acent-secondary': !tec }"
+                            <button (click)="area()" 
+                            [ngClass]="{'btn-acent': !areaBool, 'btn-acent-secondary': areaBool }"
                             type="button" class="w-100 btn btn-acent-secondary">
-                            Tecnologia
-                            <i *ngIf="tec" class="mx-1 fa fa-check"></i>
+                                Tecnologia
+                                <i *ngIf="!areaBool" class="fa fa-check"></i>
                             </button>
                         </div>
-                    </div>
+                    </div> -->
     
                     <label for="cargo">CARGO</label>
-                    <select formControlName="cargo" class="form-select mb-3" id="cargo" aria-label="Default select example">
+                    <select formControlName="cargo" class="form-select mb-3" id="cargo">
                         <option value="{{cargo._id}}" *ngFor="let cargo of cargoArea">{{cargo.cargo}}</option>
                     </select>
     
-                    <div *ngIf="formulario.value.cargo == '609b942ada58e12078b7a52f'">
+                    <div *ngIf="formulario.value.cargo == '609b942ada58e12078b7a52f' && com === true">
     
                         <label for="comision">COMISION (%)</label>
                         <input formControlName="comision" class="form-control" type="number">
@@ -83,6 +99,10 @@
                 </a>
             </b>
             
+            <button type="button" class="btn btn-success"
+            (click)="check()"
+            >Check</button>
+
             <button 
             [disabled]="formulario.invalid"
              type="submit" style="float: right;" class="btn btn-acent w-75">

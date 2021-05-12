@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PaisesService } from 'src/app/services/paises.service';
 import { DataService } from '../../services/data.service';
-import { Empleado } from '../../models/empleado.model';
 
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
@@ -13,91 +12,69 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./new.component.scss']
 })
 export class NewComponent implements OnInit {
+  
+  formulario: FormGroup
 
   constructor(private data: DataService,
     private paisesService: PaisesService,
     private router: Router,
     private fBuilder: FormBuilder) {
-    this.getPaises()
-    this.getCargosByArea('administrativa')
-    this.empleado.area = 'administrativa'
-    this.empleado.cargo = ''
-    this.getCargos()
+    
+    this.area()
 
+    this.getPaises()
+        
     this.formulario = this.fBuilder.group({
       nombre:['', Validators.required],
       fechaNac:['', Validators.required],
-      pais:['Afghanistan', ],
+      pais:['Afghanistan', Validators.required],
       usuario:['', Validators.required],
       fechaCont:['', Validators.required],
-      estado:[true, Validators.required],
-      area:['administrativa', Validators.required],
+      estado:[true],
       cargo:['', Validators.required],
-      comision: [0],
-      edad: [0]
+      comision: 0,
+      edad: 0
     })
+
   }
 
   ngOnInit(): void {
+   
   }
-
-  formulario: FormGroup
-
-  empleado: Empleado = {
-    nombre: '',
-    fechaNac: '',
-    pais: '',
-    usuario: '',
-    fechaCont: '',
-    cargo:'',
-    estado: true,    
-    comision: 0,
-    edad: 0
-  }
-  
-  cargos: any = []
   cargoArea: any = []
-  
-  getCargos() {
-    this.data.getCargos()
-      .subscribe(
-        res => {
-          this.cargos = res.data
-      }
-    )    
-  }
 
   getCargosByArea(area: string) {
     this.data.getCargobyArea(area)
       .subscribe(
         res => {
           this.cargoArea = res.data
-          console.log(this.cargoArea);
       }
     )
   }
 
-  ad = true
-  tec = false
-
-  admin() {
-    this.ad = true
-    this.tec = false
-    this.getCargosByArea('administrativa')
-    this.empleado.area = 'administrativa'
-  }
+  areaBool = false
   
-  tecno() {
-    this.tec = true
-    this.ad = false
-    this.getCargosByArea('tecnologia')
-    this.empleado.area = 'tecnologia'
-    console.log(this.empleado);
+  com = false
 
-    this.formulario.value.cargo = '' 
+  areaValue = ''
 
+  area() {
+    this.areaBool = !this.areaBool
+
+    if (this.areaBool === true) {
+      this.areaValue = 'administrativa'
+    }
+
+    if (this.areaBool === false) {
+      this.areaValue = 'tecnologia'
+    }
+
+    this.getCargosByArea(this.areaValue)
+
+    console.log(this.areaValue);
+    this.com = true
   }
-  
+
   fecha = '12-89-2001'
   charging = false
   
@@ -114,11 +91,16 @@ export class NewComponent implements OnInit {
     return edad;
   }
 
+  check() {
+    console.log(this.formulario.value);
+    console.log(this.formulario.status);
+  }
+
   createEmpleado(formulario: any) {    
     
     this.charging = true
 
-    this.formulario.value.edad = this.calcularEdad(formulario.fechaNac)
+    formulario = {...formulario, area: this.areaValue, edad: this.calcularEdad(formulario.fechaNac)}
   
     if (this.calcularEdad(formulario.fechaNac) < 18) {
       this.charging = false
@@ -129,8 +111,11 @@ export class NewComponent implements OnInit {
         confirmButtonText: 'Volver',
         confirmButtonColor: '#5349CE',
       })
+
+      return
+      
     } else {
-      console.log(formulario);
+
       this.data.createEmpleado(formulario).subscribe(
         res => {
           this.charging = false
@@ -153,7 +138,6 @@ export class NewComponent implements OnInit {
       )
     }
   }
-
 
   paises:any = []
   getPaises() {
