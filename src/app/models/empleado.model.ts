@@ -1,4 +1,5 @@
 export interface Empleado{
+  _id?: '',
   nombre: string,
   fechaNac: string,
   pais: string,

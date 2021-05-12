@@ -13,12 +13,13 @@ export class DataService {
   urlAPI = 'https://gestion-empleados-api.herokuapp.com/api/v1/empleados'
 
   urlCargos = 'https://gestion-empleados-api.herokuapp.com/api/v1/cargos'
+  
   getAllEmpleado() {
     return this.http.get<any>(this.urlAPI)
   }
   
   getEmpleadoById(id: string) {
-    return this.http.get<any>(this.urlAPI + id)
+    return this.http.get<any>(`${this.urlAPI}/${id}`)
   }
 
   createEmpleado(empleado: Empleado) {
@@ -26,11 +27,11 @@ export class DataService {
   }
 
   editEmpleado(id: string, empleado: Empleado) {
-    return this.http.put<any>(this.urlAPI + id, empleado)
+    return this.http.put<any>(this.urlAPI + '/' + id, empleado)
   }
 
   deleteEmpleado(id: string) {
-    return this.http.delete<any>(this.urlAPI + id)
+    return this.http.delete<any>(`${this.urlAPI}/${id}`)
   }
 
   getCargos() {

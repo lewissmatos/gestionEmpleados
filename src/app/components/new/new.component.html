@@ -10,24 +10,27 @@
    
             <form action="">
                 <label for="nombre">NOMBRE COMPLETO</label>
-                <input type="text" id="nombre" class="form-control mb-3" placeholder="Nombre y apellido">
+                <input [(ngModel)]="empleado.nombre" name="nombre"
+                 type="text" id="nombre" class="form-control mb-3" placeholder="Nombre y apellido">
                 
                 <label for="fechaNac">FECHA DE NACIMIENTO</label>
-                <input type="date" id="fechaNac" class="form-control mb-3">
+                <input [(ngModel)]="empleado.fechaNac" name="fechaNac" 
+                type="date" id="fechaNac" class="form-control mb-3">
                 
                 <label for="pais">PAIS</label>
-                <select class="form-select mb-3" id="pais" aria-label="Default select example">
-                    <option *ngFor="let pais of paises" >{{pais.name}}</option>
-                    
+                <select  [(ngModel)]="empleado.pais" name="pais"  class="form-select mb-3" id="pais" aria-label="Default select example">
+                    <option *ngFor="let pais of paises" >{{pais.name}}</option>                    
                 </select>
 
                 
                 <label for="usuario">NOMBRE DE USUARIO</label>
-                <input type="text" id="usuario" class="form-control mb-3" placeholder="Usuario">
+                <input [(ngModel)]="empleado.usuario" name="usuario" 
+                 type="text" id="usuario" class="form-control mb-3" placeholder="Usuario">
                 
                 
                 <label for="fechaCont">FECHA DE CONTRATACION</label>
-                <input type="date" id="fechaCont" class="form-control mb-3">
+                <input [(ngModel)]="empleado.fechaCont" name="fechaCont" 
+                type="date" id="fechaCont" class="form-control mb-3">
                 
                 <label for="flexSwitchCheckChecked">ESTADO</label>
                 <div class="form-check form-switch mb-3">
@@ -62,20 +65,22 @@
                 </div>
 
                 <label for="cargo">CARGO</label>
-                <select class="form-select mb-3" id="cargo" aria-label="Default select example">
-                    <option *ngFor="let cargo of cargoArea">{{cargo.cargo}}</option>
+                <select [(ngModel)]="empleado.cargo" name="cargo"  class="form-select mb-3" id="cargo" aria-label="Default select example">
+                    <option value="{{cargo._id}}" *ngFor="let cargo of cargoArea">{{cargo.cargo}}</option>
                    
                 </select>
 
-                <label for="comision">COMISION</label>
-                <input class="form-control" type="number">
+                <div >
+
+                    <label for="comision">COMISION</label>
+                    <input class="form-control" type="number">
+                </div>
 
             </form>
             
         </div>
     </div>
         
-
     <div class="row mt-4">
         <div class="col-lg-6">
 
@@ -83,7 +88,8 @@
                 <a routerLink="/home" style="text-decoration: none;" class="text-acent mx-2">Volver</a>
             </b>
             
-            <button class="btn btn-acent ">Guardar
+            <button (click)="createEmpleado()"
+             type="button" style="float: right;" class="btn btn-acent w-75">Guardar
                 <i class="mx-3 fas fa-save"></i>
             </button>
         
