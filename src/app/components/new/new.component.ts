@@ -5,6 +5,7 @@ import { Empleado } from '../../models/empleado.model';
 
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new',
@@ -15,16 +16,31 @@ export class NewComponent implements OnInit {
 
   constructor(private data: DataService,
     private paisesService: PaisesService,
-    private router: Router) {
+    private router: Router,
+    private fBuilder: FormBuilder) {
     this.getPaises()
     this.getCargosByArea('administrativa')
     this.empleado.area = 'administrativa'
     this.empleado.cargo = ''
     this.getCargos()
+
+    this.formulario = this.fBuilder.group({
+      nombre:['', Validators.required],
+      fechaNac:['', Validators.required],
+      pais:['Afghanistan', ],
+      usuario:['', Validators.required],
+      fechaCont:['', Validators.required],
+      estado:[true, Validators.required],
+      area:['administrativa', Validators.required],
+      cargo:['', Validators.required],
+      comision:[0],
+    })
   }
 
   ngOnInit(): void {
   }
+
+  formulario: FormGroup
 
   empleado: Empleado = {
     nombre: '',
@@ -74,30 +90,40 @@ export class NewComponent implements OnInit {
     this.ad = false
     this.getCargosByArea('tecnologia')
     this.empleado.area = 'tecnologia'
+    console.log(this.empleado);
   }
   
-  
+  fecha = '12-89-2001'
   charging = false
   
-  createEmpleado() {
+  calcularEdad(fecha: any) {
+    let hoy = new Date();
+    let cumpleanos = new Date(fecha);
+    let edad = hoy.getFullYear() - cumpleanos.getFullYear();
+    let m = hoy.getMonth() - cumpleanos.getMonth();
+
+    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+      edad--;
+    }
+
+    return edad;
+  }
+
+  createEmpleado(formulario: any) {    
     this.charging = true
-    if (this.empleado.nombre === '' || this.empleado.fechaNac === '' 
-      || this.empleado.pais === '' || this.empleado.usuario === ''
-      || this.empleado.fechaCont === '' || this.empleado.cargo === '' )
-    
-    {
+  
+    if (this.calcularEdad(formulario.fechaNac) < 18) {
       this.charging = false
-      console.log('Debe llenar todos los campos')
       Swal.fire({
-        title: 'Advertencia',
-        text: 'Debe llenar todos los campos',
-        icon: 'warning',
-        confirmButtonText: 'Aceptar',
+        icon: 'error',
+        title: 'Error',
+        text: 'Debe ser mayor a 18 años',
+        confirmButtonText: 'Volver',
         confirmButtonColor: '#5349CE',
       })
-      
     } else {
-      this.data.createEmpleado(this.empleado).subscribe(
+      console.log(formulario);
+      this.data.createEmpleado(formulario).subscribe(
         res => {
           this.charging = false
           console.log(res);
@@ -119,6 +145,7 @@ export class NewComponent implements OnInit {
       )
     }
   }
+
 
   paises:any = []
   getPaises() {

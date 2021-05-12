@@ -2,96 +2,90 @@
 
     <h1>Crear empleado</h1>
 
+    <form [formGroup]="formulario" (ngSubmit)="createEmpleado(formulario.value)">
 
+            <div class="row mt-4">
 
-    <div class="row mt-4">
-
-        <div class="col-lg-6">
-   
-            <form action="">
+            <div class="col-lg-6">
+       
                 <label for="nombre">NOMBRE COMPLETO</label>
-                <input [(ngModel)]="empleado.nombre" name="nombre"
-                 type="text" id="nombre" class="form-control mb-3" placeholder="Nombre y apellido">
+                <input formControlName="nombre" type="text" id="nombre" class="form-control mb-3" placeholder="Nombre y apellido">
                 
                 <label for="fechaNac">FECHA DE NACIMIENTO</label>
-                <input [(ngModel)]="empleado.fechaNac" name="fechaNac" 
-                type="date" id="fechaNac" class="form-control mb-3">
+                <input formControlName="fechaNac" type="date" id="fechaNac" class="form-control mb-3">
                 
                 <label for="pais">PAIS</label>
-                <select  [(ngModel)]="empleado.pais" name="pais"  class="form-select mb-3" id="pais" aria-label="Default select example">
+                <select formControlName="pais" class="form-select mb-3" id="pais" aria-label="Default select example">
                     <option *ngFor="let pais of paises" >{{pais.name}}</option>                    
                 </select>
 
                 
                 <label for="usuario">NOMBRE DE USUARIO</label>
-                <input [(ngModel)]="empleado.usuario" name="usuario" 
-                 type="text" id="usuario" class="form-control mb-3" placeholder="Usuario">
-                
+                <input formControlName="usuario" type="text" id="usuario" class="form-control mb-3" placeholder="Usuario">                
                 
                 <label for="fechaCont">FECHA DE CONTRATACION</label>
-                <input [(ngModel)]="empleado.fechaCont" name="fechaCont" 
-                type="date" id="fechaCont" class="form-control mb-3">
+                <input formControlName="fechaCont" type="date" id="fechaCont" class="form-control mb-3">
                 
                 <label for="flexSwitchCheckChecked">ESTADO</label>
                 <div class="form-check form-switch mb-3">
-                    <input [(ngModel)]="empleado.estado" name="estado" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                    <input formControlName="estado" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
                 </div>
-
-            </form>
-            
-        </div>
-
-        <div class="col-lg-6">
-   
-            <form action="">
-                <label for="nombre">AREA</label>
-                <div class="row mb-3">
-                    <div class="col-6">
-                        
-                        <button (click)="admin()"  
-                        [ngClass]="{'btn-acent': ad, 'btn-acent-secondary': !ad }"
-                        type="button" class="w-100 btn btn-acent">
-                            Administrativa
-                            <i *ngIf="ad" class="mx-2 fa fa-check"></i>
-                        </button>
+                
+            </div>
+    
+            <div class="col-lg-6">
+       
+                    <label for="nombre">AREA</label>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            
+                            <button (click)="admin()"  
+                            [ngClass]="{'btn-acent': ad, 'btn-acent-secondary': !ad }"
+                            type="button" class="w-100 btn btn-acent">
+                                Administrativa
+                                <i *ngIf="ad" class="mx-2 fa fa-check"></i>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            
+                            <button (click)="tecno()" 
+                            [ngClass]="{'btn-acent': tec, 'btn-acent-secondary': !tec }"
+                            type="button" class="w-100 btn btn-acent-secondary">
+                            Tecnologia
+                            <i *ngIf="tec" class="mx-2 fa fa-check"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        
-                        <button (click)="tecno()" 
-                        [ngClass]="{'btn-acent': tec, 'btn-acent-secondary': !tec }"
-                        type="button" class="w-100 btn btn-acent-secondary">
-                        Tecnologia
-                        <i *ngIf="tec" class="mx-2 fa fa-check"></i>
-                        </button>
+    
+                    <label for="cargo">CARGO</label>
+                    <select formControlName="cargo" class="form-select mb-3" id="cargo" aria-label="Default select example">
+                        <option value="{{cargo._id}}" *ngFor="let cargo of cargoArea">{{cargo.cargo}}</option>
+                    </select>
+    
+                    <div *ngIf="empleado.cargo == '609b942ada58e12078b7a52f'">
+    
+                        <label for="comision">COMISION (%)</label>
+                        <input formControlName="comision" class="form-control" type="number">
                     </div>
-                </div>
-
-                <label for="cargo">CARGO</label>
-                <select [(ngModel)]="empleado.cargo" name="cargo"  class="form-select mb-3" id="cargo" aria-label="Default select example">
-                    <option value="{{cargo._id}}" *ngFor="let cargo of cargoArea">{{cargo.cargo}}</option>
-                </select>
-
-                <div *ngIf="empleado.cargo == '609b942ada58e12078b7a52f'">
-
-                    <label for="comision">COMISION (%)</label>
-                    <input [(ngModel)]="empleado.comision" name="comision" class="form-control" type="number">
-                </div>
-
-            </form>
-            
+                    
+            </div>
         </div>
-    </div>
+    
+
         
     <div class="row mt-4">
         <div class="col-lg-6">
 
             <b>
-                <a routerLink="/home" style="text-decoration: none;" class="text-acent mx-2">Volver</a>
+                <a routerLink="/home" style="text-decoration: none;" class="text-acent mt-2 mx-2">
+                    <i class="fa fa-chevron-left mx-1"></i>    
+                    Volver
+                </a>
             </b>
             
-            <button (click)="createEmpleado()"
-            [disabled]="charging"
-             type="button" style="float: right;" class="btn btn-acent w-75">
+            <button 
+            [disabled]="formulario.invalid"
+             type="submit" style="float: right;" class="btn btn-acent w-75">
              {{!charging? 'Guardar': 'Guardando...'}}
              <i *ngIf="!charging" class="mx-3 fas fa-save"></i>
              <i *ngIf="charging" class="mx-3 fas fa-sync fa-spin"></i>
@@ -99,6 +93,6 @@
         
         </div>
     </div>
-
+</form>
 
 </div>
