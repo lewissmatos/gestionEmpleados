@@ -1,1 +1,131 @@
-/* You can add global styles to this file, and also import other style files */
+//valiables
+
+$acent: rgb(238, 91, 54);
+$acent-secondary: rgb(250, 145, 119);
+
+//STYLES
+
+body{
+    font-family: 'Quicksand', sans-serif !important ;  
+}
+
+button:hover{
+    transform: scale(1.02);
+    box-shadow: 0px 0px 25px rgba(37, 37, 37, 0.15);
+    padding-bottom: 6.2px;
+}
+
+.card-img{
+    border-radius: 20px;
+    width: 100%;
+}
+
+.card-cont-img{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;        
+    border-radius: 20px;
+    
+}
+
+.navbar{
+    border-radius: 20px;
+    margin-top: 20px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: white;
+    padding: 10px;
+    // padding-top: 20px;
+    box-shadow: 0px 0px 25px rgba(37, 37, 37, 0.10);
+    font-size: 24px !important;
+    
+    text-align: center;
+}
+
+.navbar-element-active {
+    color: $acent;
+}
+
+.navbar-element-inactive{
+    color: $acent-secondary;
+}
+
+
+.navbar-element-inactive :hover{
+    transform: scale(1.04) !important;
+}
+.navbar-element-active :hover{
+    transform: scale(1.04) !important;
+}
+
+.text-acent{
+    color: $acent;
+}
+
+.btn-acent{
+    background-color: $acent;
+    color: white;
+}
+
+.btn-acent-disabled{
+    background-color: $acent-secondary;
+    color: white;
+}
+
+.btn-acent:hover{
+    // background-color: rgb(228, 77, 39);
+    color: white;
+}
+.btn-acent-disabled:hover{
+    cursor: no-drop; 
+    color: white;
+    transform: scale(1.0) !important;
+    box-shadow: 0px 0px 0px transparent !important;
+    padding-bottom: 6 !important;
+}
+
+.btn{
+    border-radius: 12px !important;
+}
+
+//cardStyles
+
+.product-card img {
+    transition: all 0.15s linear;
+    position: relative;
+}
+
+.product-card img:hover {
+    transform: scale(1.01);
+}
+
+/* Animaciones */
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  
+  .fast {
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .fadeIn {
+    animation-name: fadeIn;
+  }
+  
