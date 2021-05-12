@@ -11,11 +11,10 @@ import { DataService } from 'src/app/services/data.service';
 export class ViewComponent implements OnInit {
 
   constructor(private data: DataService, private router: ActivatedRoute) {
-
+    this.getEmpleadoById(this.router.snapshot.paramMap.get('id'))
   }
   
   ngOnInit(): void {
-  this.getEmpleadoById(this.router.snapshot.paramMap.get('id'))
   }
 
   empleado: Empleado = {}
