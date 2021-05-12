@@ -36,13 +36,7 @@ export class NewComponent implements OnInit {
   
   cargos: any = []
   cargoArea: any = []
-
-
-  ad = true
-  tec = false
-
-  com = false
-
+  
   getCargos() {
     this.data.getCargos()
       .subscribe(
@@ -60,9 +54,10 @@ export class NewComponent implements OnInit {
           console.log(this.cargoArea);
       }
     )
-
-    
   }
+
+  ad = true
+  tec = false
 
   admin() {
     this.ad = true

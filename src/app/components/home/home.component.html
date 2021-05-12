@@ -28,14 +28,17 @@
               <tr *ngFor="let emp of empleados" 
               class="text-center">
                 <td>
-                  <p>{{emp.nombre}}</p>
-                  <b>({{emp.cargo.cargo}})</b>
+                  {{emp.nombre}}
+                  <p>
+
+                    <b>({{emp.cargo.cargo}})</b>
+                  </p>
                 </td>
                 <td>25</td>
                 <td>{{emp.fechaCont | date}}</td>
                 <td>
                     <i style="cursor: pointer;" class="text-success mx-2 fas fa-pencil-alt"></i>
-                    <i style="cursor: pointer;" class="text-primary mx-2 fas fa-eye"></i>
+                    <i [routerLink]="['/view', emp._id]" style="cursor: pointer;" class="text-primary mx-2 fas fa-eye"></i>
                     <i (click)="deleteEmpleado(emp._id)" style="cursor: pointer;" class="text-danger mx-2 fas fa-trash-alt"></i>
                 </td>
               </tr>              

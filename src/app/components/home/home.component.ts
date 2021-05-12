@@ -22,11 +22,11 @@ export class HomeComponent implements OnInit {
   getAllEmpleados() {
     this.data.getAllEmpleado().subscribe(
       res => {
-        console.log(res)
         this.empleados  = res.data  
       }
     )
   }
+
 
   deleteEmpleado(_id: any) {
     Swal.fire({
