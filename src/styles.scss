@@ -16,6 +16,15 @@ label{
     color: white;
     
 }
+.bg-acent-secondary{
+    background-color: $acent-secondary;
+    color: white;
+    
+}
+
+.alert{
+    border-radius: 12px;
+}
 
 body{
     font-family: 'Quicksand', sans-serif !important ;  

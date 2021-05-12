@@ -110,6 +110,7 @@ export class NewComponent implements OnInit {
   }
 
   createEmpleado(formulario: any) {    
+    
     this.charging = true
   
     if (this.calcularEdad(formulario.fechaNac) < 18) {

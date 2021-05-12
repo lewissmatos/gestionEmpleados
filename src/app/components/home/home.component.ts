@@ -28,15 +28,29 @@ export class HomeComponent implements OnInit {
   }
 
 
+  theresEmp = false
+
   getAllEmpleados() {
     this.data.getAllEmpleado().subscribe(
       res => {
         this.empleados = res.data
+
         this.fechas = res.data.map((x: any) => {
           this.edades.push(this.calcularEdad(x.fechaNac))
-        }) 
+        })
+
+        if (res.data.length > 0) {
+          this.theresEmp = true
+        }
+        if (res.data.length === 0) {
+          this.theresEmp = false
+        }
+
+        console.log(res.data.length);
       }
     )
+
+    
   }
 
   calcularEdad(fecha: any) {
@@ -67,8 +81,8 @@ export class HomeComponent implements OnInit {
         if (res.isConfirmed) {
           this.data.deleteEmpleado(_id).subscribe(
             res => {        
-              console.log(res.data);
               this.getAllEmpleados()
+              console.log(res.data);
             }
           )
         }

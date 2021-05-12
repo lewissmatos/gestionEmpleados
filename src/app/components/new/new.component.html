@@ -43,7 +43,7 @@
                             [ngClass]="{'btn-acent': ad, 'btn-acent-secondary': !ad }"
                             type="button" class="w-100 btn btn-acent">
                                 Administrativa
-                                <i *ngIf="ad" class="mx-2 fa fa-check"></i>
+                                <i *ngIf="ad" class="mx-1 fa fa-check"></i>
                             </button>
                         </div>
                         <div class="col-6">
@@ -52,7 +52,7 @@
                             [ngClass]="{'btn-acent': tec, 'btn-acent-secondary': !tec }"
                             type="button" class="w-100 btn btn-acent-secondary">
                             Tecnologia
-                            <i *ngIf="tec" class="mx-2 fa fa-check"></i>
+                            <i *ngIf="tec" class="mx-1 fa fa-check"></i>
                             </button>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                         <option value="{{cargo._id}}" *ngFor="let cargo of cargoArea">{{cargo.cargo}}</option>
                     </select>
     
-                    <div *ngIf="empleado.cargo == '609b942ada58e12078b7a52f'">
+                    <div *ngIf="formulario.value.cargo == '609b942ada58e12078b7a52f'">
     
                         <label for="comision">COMISION (%)</label>
                         <input formControlName="comision" class="form-control" type="number">
@@ -87,8 +87,8 @@
             [disabled]="formulario.invalid"
              type="submit" style="float: right;" class="btn btn-acent w-75">
              {{!charging? 'Guardar': 'Guardando...'}}
-             <i *ngIf="!charging" class="mx-3 fas fa-save"></i>
-             <i *ngIf="charging" class="mx-3 fas fa-sync fa-spin"></i>
+             <i *ngIf="!charging" class="mx-2 fas fa-save"></i>
+             <i *ngIf="charging" class="mx-2 fas fa-sync fa-spin"></i>
             </button>
         
         </div>

@@ -14,8 +14,11 @@
     </div>
 
     <div class="mt-4">
-
-        <table class="table">
+      <div *ngIf="!theresEmp" class="alert bg-acent-secondary animated fadeIn fast" role="alert">
+        No hay ningún empleado registrado, pulsa el botón para agregar alguno!
+      </div>
+      
+        <table *ngIf="theresEmp" class="table">
             <thead class="bg-acent" >
               <tr class="text-center">
                 <th scope="col">Nombre (cargo)</th>
