@@ -27,6 +27,9 @@ button:hover{
     padding-bottom: 6.2px;
 }
 
+button{
+    outline: none !important;
+}
 .card-img{
     border-radius: 20px;
     width: 100%;
@@ -96,6 +99,8 @@ button:hover{
 .btn-acent-secondary:hover{
     color: white;
 }
+
+
 .btn-acent-disabled:hover{
     cursor: no-drop; 
     color: white;

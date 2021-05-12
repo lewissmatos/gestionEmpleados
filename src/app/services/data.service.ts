@@ -12,6 +12,7 @@ export class DataService {
 
   urlAPI = 'https://gestion-empleados-api.herokuapp.com/api/v1/empleados'
 
+  urlCargos = 'https://gestion-empleados-api.herokuapp.com/api/v1/cargos'
   getAllEmpleado() {
     return this.http.get<any>(this.urlAPI)
   }
@@ -30,6 +31,14 @@ export class DataService {
 
   deleteEmpleado(id: string) {
     return this.http.delete<any>(this.urlAPI + id)
+  }
+
+  getCargos() {
+    return this.http.get<any>(this.urlCargos)
+  }
+
+  getCargobyArea(area: any) {
+    return this.http.get<any>(`${this.urlCargos}/${area}`)
   }
 
 }

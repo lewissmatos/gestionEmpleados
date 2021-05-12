@@ -9,27 +9,25 @@
         <div class="col-lg-6">
    
             <form action="">
-                <label for="nombre">NOMBRE</label>
-                <input type="text" id="nombre" class="form-control mb-3" placeholder="">
+                <label for="nombre">NOMBRE COMPLETO</label>
+                <input type="text" id="nombre" class="form-control mb-3" placeholder="Nombre y apellido">
                 
                 <label for="fechaNac">FECHA DE NACIMIENTO</label>
-                <input type="text" id="fechaNac" class="form-control mb-3" placeholder="">
+                <input type="date" id="fechaNac" class="form-control mb-3">
                 
                 <label for="pais">PAIS</label>
                 <select class="form-select mb-3" id="pais" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option *ngFor="let pais of paises" >{{pais.name}}</option>
+                    
                 </select>
 
                 
                 <label for="usuario">NOMBRE DE USUARIO</label>
-                <input type="text" id="usuario" class="form-control mb-3" placeholder="">
+                <input type="text" id="usuario" class="form-control mb-3" placeholder="Usuario">
                 
                 
                 <label for="fechaCont">FECHA DE CONTRATACION</label>
-                <input type="text" id="fechaCont" class="form-control mb-3" placeholder="">
+                <input type="date" id="fechaCont" class="form-control mb-3">
                 
                 <label for="flexSwitchCheckChecked">ESTADO</label>
                 <div class="form-check form-switch mb-3">
@@ -47,13 +45,17 @@
                 <div class="row mb-3">
                     <div class="col-6">
                         
-                        <button  type="button" id="area" class="btn btn-acent w-100" placeholder="">
+                        <button (click)="admin()"  
+                        [ngClass]="{'btn-acent': ad, 'btn-acent-secondary': !ad }"
+                        type="button" id="area" class="w-100 btn btn-acent">
                             Administrativa
                         </button>
                     </div>
                     <div class="col-6">
                         
-                        <button type="button" id="area" class="btn btn-acent-secondary w-100" placeholder="">
+                        <button (click)="tecno()" 
+                        [ngClass]="{'btn-acent': tec, 'btn-acent-secondary': !tec }"
+                        type="button" id="area" class="w-100 btn btn-acent-secondary">
                             Tecnologia
                         </button>
                     </div>
@@ -61,10 +63,8 @@
 
                 <label for="cargo">CARGO</label>
                 <select class="form-select mb-3" id="cargo" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option *ngFor="let cargo of cargoArea">{{cargo.cargo}}</option>
+                   
                 </select>
 
                 <label for="comision">COMISION</label>
