@@ -34,7 +34,7 @@
                 
                 <label for="flexSwitchCheckChecked">ESTADO</label>
                 <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                    <input [(ngModel)]="empleado.estado" name="estado" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
                 </div>
 
             </form>
@@ -52,6 +52,7 @@
                         [ngClass]="{'btn-acent': ad, 'btn-acent-secondary': !ad }"
                         type="button" class="w-100 btn btn-acent">
                             Administrativa
+                            <i *ngIf="ad" class="mx-2 fa fa-check"></i>
                         </button>
                     </div>
                     <div class="col-6">
@@ -59,7 +60,8 @@
                         <button (click)="tecno()" 
                         [ngClass]="{'btn-acent': tec, 'btn-acent-secondary': !tec }"
                         type="button" class="w-100 btn btn-acent-secondary">
-                            Tecnologia
+                        Tecnologia
+                        <i *ngIf="tec" class="mx-2 fa fa-check"></i>
                         </button>
                     </div>
                 </div>
@@ -67,13 +69,12 @@
                 <label for="cargo">CARGO</label>
                 <select [(ngModel)]="empleado.cargo" name="cargo"  class="form-select mb-3" id="cargo" aria-label="Default select example">
                     <option value="{{cargo._id}}" *ngFor="let cargo of cargoArea">{{cargo.cargo}}</option>
-                   
                 </select>
 
-                <div >
+                <div *ngIf="empleado.cargo == '609b942ada58e12078b7a52f'">
 
-                    <label for="comision">COMISION</label>
-                    <input class="form-control" type="number">
+                    <label for="comision">COMISION (%)</label>
+                    <input [(ngModel)]="empleado.comision" name="comision" class="form-control" type="number">
                 </div>
 
             </form>

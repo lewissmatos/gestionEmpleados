@@ -15,7 +15,8 @@ export class NewComponent implements OnInit {
   constructor(private data: DataService, private paisesService: PaisesService) {
     this.getPaises()
     this.getCargosByArea('administrativa')
-    this.empleado.area ='administrativa'
+    this.empleado.area = 'administrativa'
+    this.empleado.cargo = ''
     this.getCargos()
   }
 
@@ -27,7 +28,8 @@ export class NewComponent implements OnInit {
     fechaNac: '',
     pais: '',
     usuario: '',
-    fechaCont:'',
+    fechaCont: '',
+    cargo:'',
     estado: true,    
     comision: 0
   }
@@ -47,7 +49,7 @@ export class NewComponent implements OnInit {
         res => {
           this.cargos = res.data
       }
-    )
+    )    
   }
 
   getCargosByArea(area: string) {
@@ -55,8 +57,11 @@ export class NewComponent implements OnInit {
       .subscribe(
         res => {
           this.cargoArea = res.data
+          console.log(this.cargoArea);
       }
     )
+
+    
   }
 
   admin() {
@@ -78,10 +83,11 @@ export class NewComponent implements OnInit {
 
     if (this.empleado.nombre === '' || this.empleado.fechaNac === '' 
       || this.empleado.pais === '' || this.empleado.usuario === ''
-      || this.empleado.fechaCont === '')
+      || this.empleado.fechaCont === '' || this.empleado.cargo === '' )
     
     {
-      console.log('Debe llenar todos los campos');
+      console.log('Debe llenar todos los campos')
+
       Swal.fire({
         title: 'Advertencia',
         text: 'Debe llenar todos los campos',
@@ -90,8 +96,7 @@ export class NewComponent implements OnInit {
         confirmButtonColor: '#5349CE',
       })
       
-    }
-    else {
+    } else {
       this.data.createEmpleado(this.empleado).subscribe(
         res => {
             console.log(res);
