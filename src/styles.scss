@@ -1,9 +1,15 @@
 //valiables
 
-$acent: rgb(238, 91, 54);
-$acent-secondary: rgb(250, 145, 119);
+$acent: rgb(106, 56, 199);
+$acent-secondary: rgb(160, 118, 240);
 
 //STYLES
+
+
+.bg-acent{
+    background-color: $acent;
+    color: white;
+}
 
 body{
     font-family: 'Quicksand', sans-serif !important ;  
