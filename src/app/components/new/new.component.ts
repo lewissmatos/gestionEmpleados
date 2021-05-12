@@ -4,6 +4,7 @@ import { DataService } from '../../services/data.service';
 import { Empleado } from '../../models/empleado.model';
 
 import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new',
@@ -12,7 +13,9 @@ import Swal from 'sweetalert2'
 })
 export class NewComponent implements OnInit {
 
-  constructor(private data: DataService, private paisesService: PaisesService) {
+  constructor(private data: DataService,
+    private paisesService: PaisesService,
+    private router: Router) {
     this.getPaises()
     this.getCargosByArea('administrativa')
     this.empleado.area = 'administrativa'
@@ -74,15 +77,17 @@ export class NewComponent implements OnInit {
   }
   
   
+  charging = false
+  
   createEmpleado() {
-
+    this.charging = true
     if (this.empleado.nombre === '' || this.empleado.fechaNac === '' 
       || this.empleado.pais === '' || this.empleado.usuario === ''
       || this.empleado.fechaCont === '' || this.empleado.cargo === '' )
     
     {
+      this.charging = false
       console.log('Debe llenar todos los campos')
-
       Swal.fire({
         title: 'Advertencia',
         text: 'Debe llenar todos los campos',
@@ -94,7 +99,21 @@ export class NewComponent implements OnInit {
     } else {
       this.data.createEmpleado(this.empleado).subscribe(
         res => {
-            console.log(res);
+          this.charging = false
+          console.log(res);
+          Swal.fire({
+            icon: 'success',
+            title: 'Guardado',
+            text: 'Usuario guardado correctamente!',
+            confirmButtonText: 'Ir a la lista',
+            confirmButtonColor: '#5349CE',
+          }).then(
+            (res) => {
+              if (res.isConfirmed) {
+                this.router.navigate(['/home'])
+              }
+            }
+          )
         },
           error => console.log(error)
       )

@@ -9,22 +9,20 @@
         <form action="">
             
             <label for="fechaNac">FECHA DE NACIMIENTO</label>
-            <input disabled type="date" id="fechaNac" class="form-control mb-3">
+            <div class="form-control mb-3">{{empleado.fechaNac | date}}</div>
             
             <label for="pais">PAIS</label>
             <select disabled class="form-select mb-3" id="pais" aria-label="Default select example">
                 <option >{{empleado.pais}}</option>                    
             </select>
-
             
             <label for="usuario">NOMBRE DE USUARIO</label>
             <input disabled [(ngModel)]="empleado.usuario" name="usuario" 
-             type="text" id="usuario" class="form-control mb-3" placeholder="Usuario">
+            type="text" id="usuario" class="form-control mb-3" placeholder="Usuario">
             
             
             <label for="fechaCont">FECHA DE CONTRATACION</label>
-            <input disabled [(ngModel)]="empleado.fechaCont" name="fechaCont" 
-            type="date" id="fechaCont" class="form-control mb-3">
+            <div class="form-control mb-3">{{empleado.fechaCont | date}}</div>
             
             <label for="flexSwitchCheckChecked">ESTADO</label>
             <div class="form-check form-switch mb-3">

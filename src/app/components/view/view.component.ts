@@ -17,12 +17,22 @@ export class ViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  empleado: Empleado = {}
+  empleado: Empleado = {
+    fechaNac: '',
+    fechaCont: ''
+  }
+
+  fechaNac = ''
+  fechaCont = ''
   getEmpleadoById(id: any) {
     this.data.getEmpleadoById(id).subscribe(
       res => {
         console.log(res);
         this.empleado = res.data
+        
+        this.empleado.fechaNac = res.data.fechaNac
+        this.empleado.fechaCont= res.data.fechaCont
+         
       }, error => console.log(error)
     )
   }
