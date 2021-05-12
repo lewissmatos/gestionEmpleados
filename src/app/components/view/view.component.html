@@ -2,4 +2,81 @@
 
     <h1>Ver: <b>{{empleado.nombre}}</b> </h1>
     
+    <div class="row mt-4">
+
+        <div class="col-lg-6">
+
+        <form action="">
+            
+            <label for="fechaNac">FECHA DE NACIMIENTO</label>
+            <input disabled type="date" id="fechaNac" class="form-control mb-3">
+            
+            <label for="pais">PAIS</label>
+            <select disabled class="form-select mb-3" id="pais" aria-label="Default select example">
+                <option >{{empleado.pais}}</option>                    
+            </select>
+
+            
+            <label for="usuario">NOMBRE DE USUARIO</label>
+            <input disabled [(ngModel)]="empleado.usuario" name="usuario" 
+             type="text" id="usuario" class="form-control mb-3" placeholder="Usuario">
+            
+            
+            <label for="fechaCont">FECHA DE CONTRATACION</label>
+            <input disabled [(ngModel)]="empleado.fechaCont" name="fechaCont" 
+            type="date" id="fechaCont" class="form-control mb-3">
+            
+            <label for="flexSwitchCheckChecked">ESTADO</label>
+            <div class="form-check form-switch mb-3">
+                <input disabled [(ngModel)]="empleado.estado" name="estado" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="col-lg-6">
+        <form action="">
+            <label for="nombre">AREA</label>
+            <div class="row mb-3">
+                <div class="col-6">
+                    
+                    <button 
+                    disabled
+                    type="button" class="w-100 btn btn-acent">
+                        {{empleado.area}}
+                        <i class="mx-2 fa fa-check"></i>
+                    </button>
+                </div>
+                <div class="col-6">
+                    
+                    
+                </div>
+            </div>
+
+            <label for="cargo">CARGO</label>
+            <select disabled class="form-select mb-3" id="cargo" aria-label="Default select example">
+                <option value="{{empleado.cargo}}" >{{empleado.cargo?.cargo}}</option>
+            </select>
+
+            <div *ngIf="empleado.cargo?._id == '609b942ada58e12078b7a52f'">
+
+                <label for="comision">COMISION (%)</label>
+                <input disabled [(ngModel)]="empleado.comision" name="comision" class="form-control" type="number">
+            </div>
+
+        </form>
+        
+    </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-6">
+
+            <b>
+                <a routerLink="/home" style="text-decoration: none;" class="text-acent mx-2">Volver</a>
+            </b>
+            
+        </div>
+    </div>
 </div>
