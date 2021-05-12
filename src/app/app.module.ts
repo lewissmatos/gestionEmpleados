@@ -8,6 +8,7 @@ import { NewComponent } from './components/new/new.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ViewComponent } from './components/view/view.component';
 
+import {HttpClientModule} from '@angular/common/http'
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,8 @@ import { ViewComponent } from './components/view/view.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

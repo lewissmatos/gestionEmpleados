@@ -1,11 +1,13 @@
 //valiables
 
-$acent: rgb(106, 56, 199);
+$acent: rgb(86, 73, 206);
 $acent-secondary: rgb(160, 118, 240);
 
 //STYLES
 
-
+label{
+    font-size: 12px;
+}
 .bg-acent{
     background-color: $acent;
     color: white;
@@ -13,6 +15,10 @@ $acent-secondary: rgb(160, 118, 240);
 
 body{
     font-family: 'Quicksand', sans-serif !important ;  
+}
+
+a:hover{
+    color: rgb(68, 46, 146);
 }
 
 button:hover{
@@ -73,6 +79,10 @@ button:hover{
     background-color: $acent;
     color: white;
 }
+.btn-acent-secondary{
+    background-color: $acent-secondary;
+    color: white;
+}
 
 .btn-acent-disabled{
     background-color: $acent-secondary;
@@ -81,6 +91,9 @@ button:hover{
 
 .btn-acent:hover{
     // background-color: rgb(228, 77, 39);
+    color: white;
+}
+.btn-acent-secondary:hover{
     color: white;
 }
 .btn-acent-disabled:hover{

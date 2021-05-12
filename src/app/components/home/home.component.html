@@ -1,4 +1,4 @@
-<div>
+<div class="animated fadeIn">
     <div class="row">
 
         <div class="col-lg-3">
@@ -25,56 +25,22 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="text-center">
-                <th scope="row">Carlos</th>
+              <tr *ngFor="let emp of empleados" 
+              class="text-center">
+                <td>
+                  <p>{{emp.nombre}}</p>
+                  <b>({{emp.cargo.cargo}})</b>
+                </td>
                 <td>25</td>
-                <td>12/12/2020</td>
+                <td>{{emp.fechaCont | date}}</td>
                 <td>
                     <i style="cursor: pointer;" class="text-success mx-2 fas fa-pencil-alt"></i>
                     <i style="cursor: pointer;" class="text-primary mx-2 fas fa-eye"></i>
                     <i style="cursor: pointer;" class="text-danger mx-2 fas fa-trash-alt"></i>
                 </td>
               </tr>
-              <tr class="text-center">
-                <th scope="row">Carlos</th>
-                <td>25</td>
-                <td>12/12/2020</td>
-                <td>
-                    <i style="cursor: pointer;" class="text-success mx-2 fas fa-pencil-alt"></i>
-                    <i style="cursor: pointer;" class="text-primary mx-2 fas fa-eye"></i>
-                    <i style="cursor: pointer;" class="text-danger mx-2 fas fa-trash-alt"></i>
-                </td>
-              </tr>
-              <tr class="text-center">
-                <th scope="row">Carlos</th>
-                <td>25</td>
-                <td>12/12/2020</td>
-                <td>
-                    <i style="cursor: pointer;" class="text-success mx-2 fas fa-pencil-alt"></i>
-                    <i style="cursor: pointer;" class="text-primary mx-2 fas fa-eye"></i>
-                    <i style="cursor: pointer;" class="text-danger mx-2 fas fa-trash-alt"></i>
-                </td>
-              </tr>
-              <tr class="text-center">
-                <th scope="row">Carlos</th>
-                <td>25</td>
-                <td>12/12/2020</td>
-                <td>
-                    <i style="cursor: pointer;" class="text-success mx-2 fas fa-pencil-alt"></i>
-                    <i style="cursor: pointer;" class="text-primary mx-2 fas fa-eye"></i>
-                    <i style="cursor: pointer;" class="text-danger mx-2 fas fa-trash-alt"></i>
-                </td>
-              </tr>
-              <tr class="text-center">
-                <th scope="row">Carlos</th>
-                <td>25</td>
-                <td>12/12/2020</td>
-                <td>
-                    <i style="cursor: pointer;" class="text-success mx-2 fas fa-pencil-alt"></i>
-                    <i style="cursor: pointer;" class="text-primary mx-2 fas fa-eye"></i>
-                    <i style="cursor: pointer;" class="text-danger mx-2 fas fa-trash-alt"></i>
-                </td>
-              </tr>
+              
+              
             </tbody>
           </table>
 
