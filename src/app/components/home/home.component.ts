@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
       text: 'Seguro que desea eliminar?',
       icon: 'question',
       confirmButtonText: 'Aceptar',
-      confirmButtonColor: '#5349CE',
+      confirmButtonColor: '#59698d',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
       cancelButtonColor: '#CC0000'

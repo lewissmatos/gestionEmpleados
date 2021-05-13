@@ -147,7 +147,7 @@ export class EditComponent implements OnInit {
         title: 'Error',
         text: 'Debe ser mayor a 18 años',
         confirmButtonText: 'Volver',
-        confirmButtonColor: '#5349CE',
+        confirmButtonColor: '#59698d',
       })
     } else {
 
@@ -160,7 +160,7 @@ export class EditComponent implements OnInit {
             title: 'Guardado',
             text: 'Usuario guardado correctamente!',
             confirmButtonText: 'Ir a la lista',
-            confirmButtonColor: '#5349CE',
+            confirmButtonColor: '#59698d',
             html: `<h5>Empleado editado: <b>${formulario.nombre}</b></h5>`,
             allowOutsideClick: false
           }).then(
@@ -179,7 +179,7 @@ export class EditComponent implements OnInit {
             title: 'Error',
             text: 'Este nombre de usuario ya esta en uso!',
             confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#5349CE',          
+            confirmButtonColor: '#59698d',          
           })
         }
       )
