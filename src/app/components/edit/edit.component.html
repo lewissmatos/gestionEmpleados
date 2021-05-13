@@ -55,6 +55,7 @@
 
                 
                 <label for="cargo">CARGO</label>
+                
                 <select [(ngModel)]="empleado.cargo "name="cargo" formControlName="cargo" class="form-select mb-3" id="cargo">
                     <option value="{{cargo._id}}" *ngFor="let cargo of cargoArea; let id of cargoArea">{{cargo.cargo}}</option>
                 </select>

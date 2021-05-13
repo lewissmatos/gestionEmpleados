@@ -24,6 +24,7 @@ export class EditComponent implements OnInit {
     
     this.getEmpleadoById(this.router.snapshot.paramMap.get('id'))
     
+    
     this.getPaises()
 
     this.formulario = this.fBuilder.group({
@@ -37,6 +38,9 @@ export class EditComponent implements OnInit {
       comision: [0],
       edad: [0]
     })
+
+    this.empleado.cargo = this.formulario.value.cargo
+
   }
 
   idEmpleado = this.router.snapshot.paramMap.get('id')
