@@ -24,6 +24,7 @@ export class ViewComponent implements OnInit {
 
   fechaNac = ''
   fechaCont = ''
+  
   getEmpleadoById(id: any) {
     this.data.getEmpleadoById(id).subscribe(
       res => {

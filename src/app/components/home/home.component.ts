@@ -13,12 +13,9 @@ export class HomeComponent implements OnInit {
   constructor(private data: DataService) {
     this.getAllEmpleados()
     this.theresEmp = true
-   }
-
+  }
 
   empleados: Empleado[] = []
-
-  fecha = '02-07-2002'
 
   edad = 0
 
@@ -32,16 +29,15 @@ export class HomeComponent implements OnInit {
   getAllEmpleados() {
     this.data.getAllEmpleado().subscribe(
       res => {
+        
         this.empleados = res.data
 
         if (res.data.length > 0) {
           this.theresEmp = true
-        }
-        
+        }        
         if (res.data.length === 0) {
           this.theresEmp = false
         }
-
       }
     )
     
@@ -69,20 +65,25 @@ export class HomeComponent implements OnInit {
       }
     )
   }
-
   empleadosFiltrados: any[] = []
   
   searching = false
   
   buscarEmpleado(termino: string = '') {
 
-    this.empleadosFiltrados = this.empleados.filter((x: any) => x.nombre.toLowerCase().includes(termino.toLowerCase()) || x.cargo.cargo.toLowerCase().includes(termino.toLowerCase()) || x.fechaCont.toLowerCase().includes(termino.toLowerCase())) 
-
-
+    this.empleadosFiltrados = this.empleados.filter((x: any) => {
+      
+      return x.nombre.toLowerCase().includes(termino.toLowerCase())
+          || x.cargo.cargo.toLowerCase().includes(termino.toLowerCase())
+          || x.fechaCont.toLowerCase().includes(termino.toLowerCase())
+      
+    })
+    
     if (termino !== '') {
       this.searching = true
     } else {
       this.searching =false
     }
+  
   }
 }

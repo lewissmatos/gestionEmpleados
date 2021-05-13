@@ -33,6 +33,8 @@ export class DataService {
   deleteEmpleado(id: string) {
     return this.http.delete<any>(`${this.urlAPI}/${id}`)
   }
+  
+  
 
   getCargos() {
     return this.http.get<any>(this.urlCargos)

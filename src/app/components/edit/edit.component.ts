@@ -55,11 +55,9 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-   
+    
   }
 
-  
   cargoArea: any = []
   
   getCargosByArea(area: any) {
@@ -67,17 +65,14 @@ export class EditComponent implements OnInit {
       .subscribe(
         res => {
           this.cargoArea = res.data
-          console.log(this.cargoArea);
-          console.log(res.data);
+          
       }
     )
   }
-
   
   getEmpleadoById(id:any) {
     this.data.getEmpleadoById(id).subscribe(
       res => {
-        console.log(res);
         this.empleado = res.data
         
         this.getCargosByArea(res.data.area)
@@ -87,9 +82,7 @@ export class EditComponent implements OnInit {
         
         this.empleado.area = res.data.area
         this.empleado.cargo = res.data.cargo._id
-        
-        console.log(res.data.cargo, this.empleado.cargo);
-        
+                
         if (this.empleado.area === 'administrativa') {
           this.areaBool = true
           this.areaValue = 'administrativa'
@@ -98,11 +91,7 @@ export class EditComponent implements OnInit {
           this.areaBool = false
           this.areaValue = 'tecnologia'
         }
-        console.log(this.empleado);
-        // console.log(this.empleado.cargo);
-        // console.log(res.data);
-        // console.log(this.empleado.area);
-        // console.log(this.areaBool);
+        
       }, error => console.log(error)
     )
   }
@@ -117,19 +106,19 @@ export class EditComponent implements OnInit {
 
     if (this.areaBool === true) {
       this.areaValue = 'administrativa'
+      this.com = true
     }
 
     if (this.areaBool === false) {
       this.areaValue = 'tecnologia'
+      this.com = false
+
     }
 
     this.getCargosByArea(this.areaValue)
 
-    // console.log(this.areaValue);
-    this.com = true
   }
 
-  fecha = '12-89-2001'
   charging = false
   
   calcularEdad(fecha: any) {
@@ -149,13 +138,8 @@ export class EditComponent implements OnInit {
     
     this.charging = true
     
-    // console.log(this.formulario.value.cargo)
-    
     formulario = { ...formulario, area: this.areaValue, edad: this.calcularEdad(formulario.fechaNac), }
     
-    // console.log(formulario)
-    // console.log(this.empleado.cargo)
-
     if (this.calcularEdad(formulario.fechaNac) < 18) {
       this.charging = false
       Swal.fire({
@@ -177,7 +161,7 @@ export class EditComponent implements OnInit {
             text: 'Usuario guardado correctamente!',
             confirmButtonText: 'Ir a la lista',
             confirmButtonColor: '#5349CE',
-            html: `<h5>Empleado creado: <b>${formulario.nombre}</b></h5>`,
+            html: `<h5>Empleado editado: <b>${formulario.nombre}</b></h5>`,
             allowOutsideClick: false
           }).then(
             (res) => {
@@ -187,11 +171,20 @@ export class EditComponent implements OnInit {
             }
           )
         },
-          error => console.log(error)
+        error => {
+          console.log(error)
+          this.charging = false
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Este nombre de usuario ya esta en uso!',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#5349CE',          
+          })
+        }
       )
     }
   }
-
 
   paises:any = []
   getPaises() {
@@ -201,8 +194,5 @@ export class EditComponent implements OnInit {
       }
     )
   }
-
-
-
 
 }

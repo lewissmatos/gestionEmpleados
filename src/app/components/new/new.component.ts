@@ -40,6 +40,7 @@ export class NewComponent implements OnInit {
   ngOnInit(): void {
    
   }
+  
   cargoArea: any = []
 
   getCargosByArea(area: string) {
@@ -52,29 +53,26 @@ export class NewComponent implements OnInit {
   }
 
   areaBool = false
+  areaValue = ''
   
   com = false
-
-  areaValue = ''
-
   area() {
     this.areaBool = !this.areaBool
 
     if (this.areaBool === true) {
       this.areaValue = 'administrativa'
+      this.com = true
     }
 
     if (this.areaBool === false) {
       this.areaValue = 'tecnologia'
+      this.com = false
     }
 
     this.getCargosByArea(this.areaValue)
 
-    console.log(this.areaValue);
-    this.com = true
   }
 
-  fecha = '12-89-2001'
   charging = false
   
   calcularEdad(fecha: any) {
@@ -88,12 +86,6 @@ export class NewComponent implements OnInit {
     }
 
     return edad;
-  }
-
-  check() {
-    console.log(this.formulario.value.cargo);
-    console.log(this.areaValue);
-    console.log(this.formulario.status);
   }
 
   createEmpleado(formulario: any) {    
@@ -138,6 +130,7 @@ export class NewComponent implements OnInit {
         },
         error => {
           console.log(error)
+          this.charging = false
           Swal.fire({
             icon: 'error',
             title: 'Error',
