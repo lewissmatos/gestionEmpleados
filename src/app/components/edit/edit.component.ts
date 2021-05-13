@@ -50,7 +50,12 @@ export class EditComponent implements OnInit {
     edad: 0
   }
 
-    
+  ngOnInit(): void {
+
+   
+  }
+
+  
   cargoArea: any = []
   
   getCargosByArea(area: any) {
@@ -64,31 +69,34 @@ export class EditComponent implements OnInit {
     )
   }
 
-
+  
   getEmpleadoById(id:any) {
     this.data.getEmpleadoById(id).subscribe(
       res => {
         console.log(res);
         this.empleado = res.data
         
+        this.getCargosByArea(res.data.area)
+        
         this.empleado.fechaNac = res.data.fechaNac.substring(0, 10)
         this.empleado.fechaCont = res.data.fechaCont.substring(0, 10)
         
         this.empleado.area = res.data.area
-        this.empleado.cargo = res.data.cargo.cargo
-
+        this.empleado.cargo = res.data.cargo
+        
+        
         if (this.empleado.area === 'administrativa') {
           this.areaBool = true
+          this.areaValue = 'administrativa'
         }
         else{
           this.areaBool = false
+          this.areaValue = 'tecnologia'
         }
-        console.log(this.empleado.cargo);
-        console.log(res.data);
-        console.log(this.empleado.area);
-        console.log(this.areaBool);
-
-        this.getCargosByArea(this.empleado.area)
+        // console.log(this.empleado.cargo);
+        // console.log(res.data);
+        // console.log(this.empleado.area);
+        // console.log(this.areaBool);
          
       }, error => console.log(error)
     )
@@ -112,7 +120,7 @@ export class EditComponent implements OnInit {
 
     this.getCargosByArea(this.areaValue)
 
-    console.log(this.areaValue);
+    // console.log(this.areaValue);
     this.com = true
   }
 
@@ -136,10 +144,12 @@ export class EditComponent implements OnInit {
     
     this.charging = true
     
-    console.log(this.formulario.value.cargo)
-
-    formulario = { ...formulario, area: this.areaValue, edad: this.calcularEdad(formulario.fechaNac), cargo: this.formulario.value.cargo }
+    // console.log(this.formulario.value.cargo)
     
+    formulario = { ...formulario, area: this.areaValue, edad: this.calcularEdad(formulario.fechaNac), cargo: this.empleado.cargo }
+    
+    // console.log(formulario)
+    // console.log(this.empleado.cargo)
 
     if (this.calcularEdad(formulario.fechaNac) < 18) {
       this.charging = false
@@ -186,9 +196,6 @@ export class EditComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
-  }
 
-  
 
 }

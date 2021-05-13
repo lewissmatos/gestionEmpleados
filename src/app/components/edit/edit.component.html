@@ -62,7 +62,7 @@
                 <div *ngIf="formulario.value.cargo == '609b942ada58e12078b7a52f' && com === true">
 
                     <label for="comision">COMISION (%)</label>
-                    <input formControlName="comision" class="form-control" type="number">
+                    <input min="0" max="100" formControlName="comision" class="form-control" type="number">
                 </div>
                 
         </div>
