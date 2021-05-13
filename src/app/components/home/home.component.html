@@ -15,7 +15,8 @@
     </div>
 
     <div class="mt-4">
-      <div *ngIf="!theresEmp" class="alert bg-acent-secondary animated fadeIn fast" role="alert">
+
+      <div *ngIf="theresEmp === false" class="alert bg-acent-secondary animated fadeIn fast" role="alert">
         No hay ningún empleado registrado, pulsa el botón para agregar alguno!
       </div>
       

@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private data: DataService) {
     this.getAllEmpleados()
+    this.theresEmp = true
    }
 
 
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  theresEmp = false
+  theresEmp = true
 
   getAllEmpleados() {
     this.data.getAllEmpleado().subscribe(

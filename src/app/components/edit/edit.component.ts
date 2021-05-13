@@ -31,7 +31,7 @@ export class EditComponent implements OnInit {
       nombre:['', Validators.required],
       fechaNac:['', Validators.required],
       pais:['Afghanistan', ],
-      usuario:['', Validators.required],
+      usuario:['', [Validators.required, Validators.pattern('[a-zA-Z0-9]*')]],      
       fechaCont:['', Validators.required],
       estado:[true, Validators.required],
       cargo:['', Validators.required],
@@ -86,8 +86,9 @@ export class EditComponent implements OnInit {
         this.empleado.fechaCont = res.data.fechaCont.substring(0, 10)
         
         this.empleado.area = res.data.area
-        this.empleado.cargo = res.data.cargo
+        this.empleado.cargo = res.data.cargo._id
         
+        console.log(res.data.cargo, this.empleado.cargo);
         
         if (this.empleado.area === 'administrativa') {
           this.areaBool = true
@@ -97,11 +98,11 @@ export class EditComponent implements OnInit {
           this.areaBool = false
           this.areaValue = 'tecnologia'
         }
+        console.log(this.empleado);
         // console.log(this.empleado.cargo);
         // console.log(res.data);
         // console.log(this.empleado.area);
         // console.log(this.areaBool);
-         
       }, error => console.log(error)
     )
   }
@@ -150,7 +151,7 @@ export class EditComponent implements OnInit {
     
     // console.log(this.formulario.value.cargo)
     
-    formulario = { ...formulario, area: this.areaValue, edad: this.calcularEdad(formulario.fechaNac), cargo: this.empleado.cargo }
+    formulario = { ...formulario, area: this.areaValue, edad: this.calcularEdad(formulario.fechaNac), }
     
     // console.log(formulario)
     // console.log(this.empleado.cargo)
@@ -176,6 +177,8 @@ export class EditComponent implements OnInit {
             text: 'Usuario guardado correctamente!',
             confirmButtonText: 'Ir a la lista',
             confirmButtonColor: '#5349CE',
+            html: `<h5>Empleado creado: <b>${formulario.nombre}</b></h5>`,
+            allowOutsideClick: false
           }).then(
             (res) => {
               if (res.isConfirmed) {

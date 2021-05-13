@@ -27,7 +27,7 @@ export class NewComponent implements OnInit {
       nombre:['', Validators.required],
       fechaNac:['', Validators.required],
       pais:['Afghanistan', Validators.required],
-      usuario:['', Validators.required],
+      usuario:['', [Validators.required, Validators.pattern('[a-zA-Z0-9]*')]],
       fechaCont:['', Validators.required],
       estado:[true],
       cargo:['', Validators.required],
@@ -126,6 +126,8 @@ export class NewComponent implements OnInit {
             text: 'Usuario guardado correctamente!',
             confirmButtonText: 'Ir a la lista',
             confirmButtonColor: '#5349CE',
+            html: `<h5>Empleado creado: <b>${formulario.nombre}</b></h5>`,
+            allowOutsideClick: false
           }).then(
             (res) => {
               if (res.isConfirmed) {
@@ -134,7 +136,16 @@ export class NewComponent implements OnInit {
             }
           )
         },
-          error => console.log(error)
+        error => {
+          console.log(error)
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Este nombre de usuario ya esta en uso!',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#5349CE',          
+          })
+        }
       )
     }
   }
