@@ -49,30 +49,10 @@
                         Tecnologia
                         <i *ngIf="!areaBool" class="fa fa-check"></i>
                     </button>
+                    
                 </div>  
 
-                    <!-- <div class="row mb-3">
-                        <div class="col-6">
-                            
-                            <button (click)="area()"  
-                            [ngClass]="{'btn-acent': areaBool, 'btn-acent-secondary': !areaBool }"
-                            type="button" class="w-100 btn btn-acent">
-                                Administrativa
-                                <i *ngIf="areaBool" class="fa fa-check"></i>
-                            </button>
-                        </div>
-                       
-                        <div class="col-6">
-                            
-                            <button (click)="area()" 
-                            [ngClass]="{'btn-acent': !areaBool, 'btn-acent-secondary': areaBool }"
-                            type="button" class="w-100 btn btn-acent-secondary">
-                                Tecnologia
-                                <i *ngIf="!areaBool" class="fa fa-check"></i>
-                            </button>
-                        </div>
-                    </div> -->
-    
+                    
                     <label for="cargo">CARGO</label>
                     <select formControlName="cargo" class="form-select mb-3" id="cargo">
                         <option value="{{cargo._id}}" *ngFor="let cargo of cargoArea">{{cargo.cargo}}</option>
@@ -81,7 +61,7 @@
                     <div *ngIf="formulario.value.cargo == '609b942ada58e12078b7a52f' && com === true">
     
                         <label for="comision">COMISION (%)</label>
-                        <input formControlName="comision" class="form-control" type="number">
+                        <input min="0" max="100" formControlName="comision" class="form-control" type="number">
                     </div>
                     
             </div>
@@ -98,10 +78,8 @@
                     Volver
                 </a>
             </b>
-            
-            <button type="button" class="btn btn-success"
-            (click)="check()"
-            >Check</button>
+
+            <button (click)="check()">check</button>
 
             <button 
             [disabled]="formulario.invalid"
@@ -113,6 +91,6 @@
         
         </div>
     </div>
-</form>
+    </form>
 
 </div>

@@ -21,7 +21,6 @@ export class NewComponent implements OnInit {
     private fBuilder: FormBuilder) {
     
     this.area()
-
     this.getPaises()
         
     this.formulario = this.fBuilder.group({
@@ -92,7 +91,8 @@ export class NewComponent implements OnInit {
   }
 
   check() {
-    console.log(this.formulario.value);
+    console.log(this.formulario.value.cargo);
+    console.log(this.areaValue);
     console.log(this.formulario.status);
   }
 
@@ -100,7 +100,7 @@ export class NewComponent implements OnInit {
     
     this.charging = true
 
-    formulario = {...formulario, area: this.areaValue, edad: this.calcularEdad(formulario.fechaNac)}
+    formulario = {...formulario, area: this.areaValue, edad: this.calcularEdad(formulario.fechaNac), cargo: this.formulario.value.cargo}
   
     if (this.calcularEdad(formulario.fechaNac) < 18) {
       this.charging = false
@@ -112,7 +112,7 @@ export class NewComponent implements OnInit {
         confirmButtonColor: '#5349CE',
       })
 
-      return
+      return console.log()
       
     } else {
 

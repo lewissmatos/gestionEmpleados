@@ -2,68 +2,64 @@
 
     <h1>Editando: <b>{{empleado.nombre}}</b> </h1>
     
-    <form [formGroup]="formulario" (ngSubmit)="createEmpleado(formulario.value)">
+    
+    <form [formGroup]="formulario" (ngSubmit)="GuardarEdicion(formulario.value)">
 
         <div class="row mt-4">
 
         <div class="col-lg-6">
    
             <label for="nombre">NOMBRE COMPLETO</label>
-            <input [(ngModel)]="empleado.nombre" name="nombre" formControlName="nombre" type="text" id="nombre" class="form-control mb-3" placeholder="Nombre y apellido">
+            <input [(ngModel)]="empleado.nombre "name="nombre" formControlName="nombre" type="text" id="nombre" class="form-control mb-3" placeholder="Nombre y apellido">
             
             <label for="fechaNac">FECHA DE NACIMIENTO</label>
-            <input [(ngModel)]="empleado.fechaNac" name="fechaNac" formControlName="fechaNac" type="date" id="fechaNac" class="form-control mb-3">
+            <input [(ngModel)]="empleado.fechaNac "name="fechaNac" formControlName="fechaNac" type="date" id="fechaNac" class="form-control mb-3">
             
             <label for="pais">PAIS</label>
-            <select [(ngModel)]="empleado.pais" name="pais" formControlName="pais" class="form-select mb-3" id="pais" aria-label="Default select example">
+            <select [(ngModel)]="empleado.pais "name="pais" formControlName="pais" class="form-select mb-3" id="pais" aria-label="Default select example">
                 <option *ngFor="let pais of paises" >{{pais.name}}</option>                    
             </select>
 
             
             <label for="usuario">NOMBRE DE USUARIO</label>
-            <input [(ngModel)]="empleado.usuario" name="usuario" formControlName="usuario" type="text" id="usuario" class="form-control mb-3" placeholder="Usuario">                
+            <input [(ngModel)]="empleado.usuario "name="usuario" formControlName="usuario" type="text" id="usuario" class="form-control mb-3" placeholder="Usuario">                
             
             <label for="fechaCont">FECHA DE CONTRATACION</label>
-            <input [(ngModel)]="empleado.fechaCont" name="fechaCont"  formControlName="fechaCont" type="date" id="fechaCont" class="form-control mb-3">
+            <input [(ngModel)]="empleado.fechaCont "name="fechaCont" formControlName="fechaCont" type="date" id="fechaCont" class="form-control mb-3">
             
             <label for="flexSwitchCheckChecked">ESTADO</label>
             <div class="form-check form-switch mb-3">
-                <input [(ngModel)]="empleado.estado" name="estado" formControlName="estado" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                <input [(ngModel)]="empleado.estado "name="estado" formControlName="estado" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
             </div>
             
         </div>
 
         <div class="col-lg-6">
-   
-                <label for="nombre">AREA</label>
-                <div class="row mb-3">
-                    <div class="col-6">
-                        
-                        <button (click)="admin()"  
-                        [ngClass]="{'btn-acent': ad, 'btn-acent-secondary': !ad }"
-                        type="button" class="w-100 btn btn-acent">
-                            Administrativa
-                            <i *ngIf="ad" class="fa fa-check"></i>
-                        </button>
-                    </div>
-                   
-                    <div class="col-6">
-                        
-                        <button (click)="tecno()" 
-                        [ngClass]="{'btn-acent': tec, 'btn-acent-secondary': !tec }"
-                        type="button" class="w-100 btn btn-acent-secondary">
-                        Tecnologia
-                        <i *ngIf="tec" class="fa fa-check"></i>
-                        </button>
-                    </div>
-                </div>
+            <label for="area">AREA</label>
+            <div id="area">
 
+                <button (click)="area()" style="border-top-right-radius: 0px !important; border-bottom-right-radius: 0px !important;"
+                [ngClass]="{'btn-acent': areaBool, 'btn-acent-secondary': !areaBool }"
+                type="button" class="w-50 btn btn-acent">
+                    Administrativa
+                    <i *ngIf="areaBool" class="fa fa-check"></i>
+                </button>
+                <button (click)="area()" style="border-top-left-radius: 0px !important; border-bottom-left-radius: 0px !important;"
+                [ngClass]="{'btn-acent': !areaBool, 'btn-acent-secondary': areaBool }"
+                type="button" class="w-50 btn btn-acent-secondary">
+                    Tecnologia
+                    <i *ngIf="!areaBool" class="fa fa-check"></i>
+                </button>
+                
+            </div>  
+
+                
                 <label for="cargo">CARGO</label>
-                <select formControlName="cargo" class="form-select mb-3" id="cargo" aria-label="Default select example">
-                    <option value="{{cargo._id}}" *ngFor="let cargo of cargoArea">{{cargo.cargo}}</option>
+                <select [(ngModel)]="empleado.cargo "name="cargo" formControlName="cargo" class="form-select mb-3" id="cargo">
+                    <option value="{{cargo._id}}" *ngFor="let cargo of cargoArea; let id of cargoArea">{{cargo.cargo}}</option>
                 </select>
 
-                <div *ngIf="formulario.value.cargo == '609b942ada58e12078b7a52f'">
+                <div *ngIf="formulario.value.cargo == '609b942ada58e12078b7a52f' && com === true">
 
                     <label for="comision">COMISION (%)</label>
                     <input formControlName="comision" class="form-control" type="number">

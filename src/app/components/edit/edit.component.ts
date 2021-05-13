@@ -21,14 +21,10 @@ export class EditComponent implements OnInit {
     private route: Router,
     private router: ActivatedRoute,
     private fBuilder: FormBuilder) {
-      this.getEmpleadoById(this.router.snapshot.paramMap.get('id'))
-
+    
+    this.getEmpleadoById(this.router.snapshot.paramMap.get('id'))
     
     this.getPaises()
-    this.getCargosByArea('administrativa')
-    this.empleado.area = 'administrativa'
-    this.empleado.cargo = ''
-    this.getCargos()
 
     this.formulario = this.fBuilder.group({
       nombre:['', Validators.required],
@@ -37,27 +33,37 @@ export class EditComponent implements OnInit {
       usuario:['', Validators.required],
       fechaCont:['', Validators.required],
       estado:[true, Validators.required],
-      area:['', Validators.required],
       cargo:['', Validators.required],
       comision: [0],
       edad: [0]
     })
   }
 
+  idEmpleado = this.router.snapshot.paramMap.get('id')
 
   formulario: FormGroup
 
   empleado: Empleado = {
-    nombre: '',
-    fechaNac: '',
-    pais: '',
-    usuario: '',
-    fechaCont: '',
-    cargo:'',
+   
     estado: true,    
     comision: 0,
     edad: 0
   }
+
+    
+  cargoArea: any = []
+  
+  getCargosByArea(area: any) {
+    this.data.getCargobyArea(area)
+      .subscribe(
+        res => {
+          this.cargoArea = res.data
+          console.log(this.cargoArea);
+          console.log(res.data);
+      }
+    )
+  }
+
 
   getEmpleadoById(id:any) {
     this.data.getEmpleadoById(id).subscribe(
@@ -65,61 +71,51 @@ export class EditComponent implements OnInit {
         console.log(res);
         this.empleado = res.data
         
-        this.empleado.fechaNac = res.data.fechaNac
-        this.empleado.fechaCont = res.data.fechaCont
+        this.empleado.fechaNac = res.data.fechaNac.substring(0, 10)
+        this.empleado.fechaCont = res.data.fechaCont.substring(0, 10)
         
         this.empleado.area = res.data.area
+        this.empleado.cargo = res.data.cargo.cargo
 
-        console.log(this.empleado.area)
+        if (this.empleado.area === 'administrativa') {
+          this.areaBool = true
+        }
+        else{
+          this.areaBool = false
+        }
+        console.log(this.empleado.cargo);
+        console.log(res.data);
+        console.log(this.empleado.area);
+        console.log(this.areaBool);
+
+        this.getCargosByArea(this.empleado.area)
          
       }, error => console.log(error)
     )
   }
+
+  com = false
   
-  cargos: any = []
-  cargoArea: any = []
-  
-  getCargos() {
-    this.data.getCargos()
-      .subscribe(
-        res => {
-          this.cargos = res.data
-      }
-    )    
+  areaValue = ''
+  areaBool = false
+
+  area() {
+    this.areaBool = !this.areaBool
+
+    if (this.areaBool === true) {
+      this.areaValue = 'administrativa'
+    }
+
+    if (this.areaBool === false) {
+      this.areaValue = 'tecnologia'
+    }
+
+    this.getCargosByArea(this.areaValue)
+
+    console.log(this.areaValue);
+    this.com = true
   }
 
-  getCargosByArea(area: string) {
-    this.data.getCargobyArea(area)
-      .subscribe(
-        res => {
-          this.cargoArea = res.data
-          console.log(this.cargoArea);
-      }
-    )
-  }
-
-  ad = true
-  tec = false
-
-  admin() {
-    this.ad = true
-    this.tec = false
-    this.getCargosByArea('administrativa')
-    this.empleado.area = 'administrativa'
-  }
-  
-  tecno() {
-    this.tec = true
-    this.ad = false
-    this.getCargosByArea('tecnologia')
-    this.empleado.area = 'tecnologia'
-
-    console.log(this.empleado);
-
-    this.formulario.value.cargo = '' 
-
-  }
-  
   fecha = '12-89-2001'
   charging = false
   
@@ -136,12 +132,15 @@ export class EditComponent implements OnInit {
     return edad;
   }
 
-  createEmpleado(formulario: any) {    
+  GuardarEdicion(formulario: any) {    
     
     this.charging = true
+    
+    console.log(this.formulario.value.cargo)
 
-    this.formulario.value.edad = this.calcularEdad(formulario.fechaNac)
-  
+    formulario = { ...formulario, area: this.areaValue, edad: this.calcularEdad(formulario.fechaNac), cargo: this.formulario.value.cargo }
+    
+
     if (this.calcularEdad(formulario.fechaNac) < 18) {
       this.charging = false
       Swal.fire({
@@ -152,8 +151,8 @@ export class EditComponent implements OnInit {
         confirmButtonColor: '#5349CE',
       })
     } else {
-      console.log(formulario);
-      this.data.createEmpleado(formulario).subscribe(
+
+      this.data.editEmpleado(this.idEmpleado, formulario).subscribe(
         res => {
           this.charging = false
           console.log(res);

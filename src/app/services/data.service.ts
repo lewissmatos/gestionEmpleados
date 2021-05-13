@@ -26,7 +26,7 @@ export class DataService {
     return this.http.post<any>(this.urlAPI, empleado)
   }
 
-  editEmpleado(id: string, empleado: Empleado) {
+  editEmpleado(id: any, empleado: Empleado) {
     return this.http.put<any>(this.urlAPI + '/' + id, empleado)
   }
 

@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
         if (res.data.length > 0) {
           this.theresEmp = true
         }
+        
         if (res.data.length === 0) {
           this.theresEmp = false
         }
