@@ -108,10 +108,10 @@
                 <tr *ngFor="let emp of empleadosFiltrados; let i = index" 
                 class="text-center">
                 <td>
-                  {{emp.nombre}}
-                  <p>
-                    <b>({{emp.cargo.cargo}})</b>
-                  </p>
+                  <b>
+                    {{emp.nombre}}
+                   </b>
+                   <p style="color: gray;"> ({{emp.cargo.cargo}})</p>                   
                   
                 </td>
                 <td>{{emp.edad}}</td>

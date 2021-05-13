@@ -119,6 +119,17 @@ button{
 }
 
 
+
+.form-control:focus{
+    box-shadow: 0 0 0 0.15rem rgb(89 105 141 / 25%);
+    border-color: rgba(89, 105, 141, 0.25);
+}
+
+.btn:focus{
+    box-shadow: 0 0 0 0.05rem rgb(89 105 141 / 15%);
+    border-color: rgba(89, 105, 141, 0.15);
+}
+
 .btn-acent-disabled:hover{
     cursor: no-drop; 
     color: white;
