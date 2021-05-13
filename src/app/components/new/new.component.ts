@@ -27,7 +27,7 @@ export class NewComponent implements OnInit {
       nombre:['', Validators.required],
       fechaNac:['', Validators.required],
       pais:['Afghanistan', Validators.required],
-      usuario:['', [Validators.required, Validators.pattern('[a-zA-Z0-9]*')]],
+      usuario:['', [Validators.required, Validators.pattern('[a-zA-Z0-9_]*')]],
       fechaCont:['', Validators.required],
       estado:[true],
       cargo:['', Validators.required],
