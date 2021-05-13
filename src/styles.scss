@@ -6,11 +6,22 @@ $acent: rgb(89, 105, 141);
 $acent-secondary: rgb(177, 186, 206);
 $acent-optional: rgb(43, 187, 173);
 $acent-blue: rgb(69, 82, 110);
+
 //STYLES
+.form-check-input:checked{
+    background-color: $acent;
+    box-shadow: 0 0 0 0.15rem rgb(89 105 141 / 25%);
+    border-color: rgba(89, 105, 141, 0.25);
+}
+.form-check-input:focus{
+    box-shadow: none;
+    border-color: rgba(89, 105, 141, 0.25);
+}
 
 label{
     font-size: 12px;
 }
+
 .bg-acent{
     background-color: $acent;
     color: white;
@@ -28,7 +39,7 @@ label{
 
 body{
     font-family: 'Quicksand', sans-serif !important ;  
-    background-color: rgb(253, 253, 253);
+    background-color: rgb(251, 251, 251);
 }
 
 a:hover{

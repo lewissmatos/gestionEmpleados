@@ -20,59 +20,6 @@
         No hay ningún empleado registrado, pulsa el botón para agregar alguno!
       </div>
       
-        <!-- <table *ngIf="theresEmp" class="table">
-            <thead class="bg-acent" >
-              <tr class="text-center">
-                <th scope="col">Nombre (cargo)</th>
-                <th scope="col">Edad</th>
-                <th scope="col">Fecha de contratación</th>
-                <th scope="col">Acciones</th>
-              </tr>
-            </thead>
-
-            <tbody *ngIf="!searching">
-                <tr *ngFor="let emp of empleados; let i = index" 
-                class="text-center">
-                <td>
-                  {{emp.nombre}}
-                  <p>
-                    <b>({{emp.cargo.cargo}})</b>
-                  </p>
-                  
-                </td>
-                <td>{{emp.edad}}</td>
-                <td>{{emp.fechaCont | date}}</td>
-                <td style="font-size: 20px;">
-                  <i [routerLink]="['/edit', emp._id]" style="cursor: pointer;" class="text-success mx-2 fas fa-pencil-alt"></i>
-                  <i [routerLink]="['/view', emp._id]" style="cursor: pointer;" class="text-primary mx-2 fas fa-eye"></i>
-                  <i (click)="deleteEmpleado(emp._id)" style="cursor: pointer;" class="text-danger mx-2 fas fa-trash-alt"></i>
-                </td>
-              </tr>              
-              
-            </tbody>
-
-            <tbody *ngIf="searching">
-                <tr *ngFor="let emp of empleadosFiltrados; let i = index" 
-                class="text-center">
-                <td>
-                  {{emp.nombre}}
-                  <p>
-                    <b>({{emp.cargo.cargo}})</b>
-                  </p>
-                  
-                </td>
-                <td>{{emp.edad}}</td>
-                <td>{{emp.fechaCont | date}}</td>
-                <td style="font-size: 20px;">
-                  <i style="cursor: pointer;" class="text-success mx-2 fas fa-pencil-alt"></i>
-                  <i [routerLink]="['/view', emp._id]" style="cursor: pointer;" class="text-primary mx-2 fas fa-eye"></i>
-                  <i (click)="deleteEmpleado(emp._id)" style="cursor: pointer;" class="text-danger mx-2 fas fa-trash-alt"></i>
-                </td>
-              </tr>              
-              
-            </tbody>
-          </table> -->
-
           <table *ngIf="theresEmp" class="table">
               
               <thead style="width: 100%;">
@@ -118,9 +65,9 @@
                 <td>{{emp.edad}}</td>
                 <td>{{emp.fechaCont | date}}</td>
                 <td style="font-size: 20px;">
-                  <i style="cursor: pointer;" class="text-success mx-2 fas fa-pencil-alt"></i>
-                  <i [routerLink]="['/view', emp._id]" style="cursor: pointer;" class="text-primary mx-2 fas fa-eye"></i>
-                  <i (click)="deleteEmpleado(emp._id)" style="cursor: pointer;" class="text-danger mx-2 fas fa-trash-alt"></i>
+                  <i style="cursor: pointer;" class=" text-success mx-2 fas fa-pencil-alt"></i>
+                  <i [routerLink]="['/view', emp._id]" style="cursor: pointer;" class=" text-primary mx-2 fas fa-eye"></i>
+                  <i (click)="deleteEmpleado(emp._id)" style="cursor: pointer;" class=" text-danger mx-2 fas fa-trash-alt"></i>
                 </td>
               </tr>              
               
